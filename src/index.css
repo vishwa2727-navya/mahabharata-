@@ -1637,12 +1637,122 @@ html {
     width: 2px;
     height: 2px;
   }
-  
+
   .video-description-card {
     padding: 1rem;
   }
-  
+
   .video-loading-text {
     font-size: 0.9rem;
+  }
+}
+
+/* ============================================================
+   MOBILE PERFORMANCE: Disable heavy animations on small screens
+   Prevents janky scrolling on 4GB phones
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Hide all decorative floating elements on mobile */
+  .mobile-hide-decorations {
+    display: none !important;
+  }
+
+  /* Stop background position animations - major perf win */
+  .character-sky-bg {
+    animation: none !important;
+    background-position: 0% 40% !important;
+  }
+  .character-sky-bg::before {
+    animation: none !important;
+  }
+  .epic-sky-bg {
+    animation: none !important;
+    background-position: 0% 40% !important;
+  }
+  .epic-sky-bg::before {
+    animation: none !important;
+  }
+  .interactive-sky-bg {
+    animation: none !important;
+    background-position: 0% 40% !important;
+  }
+  .interactive-sky-bg::before {
+    animation: none !important;
+  }
+  .gameplay-sky-bg {
+    animation: none !important;
+    background-position: 0% 40% !important;
+  }
+  .gameplay-sky-bg::before {
+    animation: none !important;
+  }
+
+  /* Stop card border glow animation */
+  .epic-card::before {
+    animation: none !important;
+    background: linear-gradient(45deg, #FFD700, #FF6B35) !important;
+  }
+  .epic-card:hover {
+    transform: none !important;
+  }
+
+  /* Stop button animations */
+  .epic-btn {
+    animation: none !important;
+  }
+  .epic-btn::after {
+    animation: none !important;
+  }
+
+  /* Stop answer border animations */
+  .answer-option::after {
+    animation: none !important;
+  }
+  .answer-correct::after {
+    animation: none !important;
+  }
+  .answer-incorrect::after {
+    animation: none !important;
+  }
+
+  /* Stop title shimmer */
+  .epic-title {
+    animation: none !important;
+    background-position: 0% 50% !important;
+  }
+
+  /* Stop fixed background blobs from pulsing */
+  .fixed.inset-0 .animate-pulse,
+  .fixed.inset-0 [class*="animate-pulse"] {
+    animation: none !important;
+  }
+
+  /* Stop character message glow */
+  .character-message::before {
+    animation: none !important;
+  }
+
+  /* Smooth scrolling with momentum on iOS */
+  .min-h-screen {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Use GPU-composited layers for scroll containers */
+  .overflow-y-auto,
+  .overflow-auto {
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+  }
+
+  /* Contain paint to avoid full-page repaints during scroll */
+  .epic-card {
+    contain: layout style paint;
+    will-change: auto;
+  }
+
+  /* Remove backdrop filters on mobile (very expensive) */
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 }
